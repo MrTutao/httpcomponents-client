@@ -38,6 +38,8 @@ import org.apache.hc.core5.http.HttpException;
 import org.apache.hc.core5.http.HttpHeaders;
 import org.apache.hc.core5.http.HttpRequest;
 import org.apache.hc.core5.http.HttpRequestInterceptor;
+import org.apache.hc.core5.http.HttpVersion;
+import org.apache.hc.core5.http.ProtocolVersion;
 import org.apache.hc.core5.http.protocol.HttpContext;
 import org.apache.hc.core5.util.Args;
 import org.slf4j.Logger;
@@ -81,13 +83,14 @@ public class RequestClientConnControl implements HttpRequestInterceptor {
             return;
         }
 
+        final ProtocolVersion ver = context.getProtocolVersion();
         if (route.getHopCount() == 1 || route.isTunnelled()) {
-            if (!request.containsHeader(HttpHeaders.CONNECTION)) {
+            if (!request.containsHeader(HttpHeaders.CONNECTION) && ver.lessEquals(HttpVersion.HTTP_1_0)) {
                 request.addHeader(HttpHeaders.CONNECTION, HeaderElements.KEEP_ALIVE);
             }
         }
         if (route.getHopCount() == 2 && !route.isTunnelled()) {
-            if (!request.containsHeader(PROXY_CONN_DIRECTIVE)) {
+            if (!request.containsHeader(PROXY_CONN_DIRECTIVE) && ver.lessEquals(HttpVersion.HTTP_1_0)) {
                 request.addHeader(PROXY_CONN_DIRECTIVE, HeaderElements.KEEP_ALIVE);
             }
         }

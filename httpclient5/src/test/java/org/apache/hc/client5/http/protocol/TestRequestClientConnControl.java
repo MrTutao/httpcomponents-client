@@ -76,8 +76,8 @@ public class TestRequestClientConnControl {
         interceptor.process(request, null, context);
 
         final Header header1 = request.getFirstHeader(HttpHeaders.CONNECTION);
-        Assert.assertNotNull(header1);
-        Assert.assertEquals(HeaderElements.KEEP_ALIVE, header1.getValue());
+        Assert.assertNull(header1);
+        //Assert.assertEquals(HeaderElements.KEEP_ALIVE, header1.getValue());
         final Header header2 = request.getFirstHeader("Proxy-Connection");
         Assert.assertNull(header2);
     }
@@ -98,8 +98,8 @@ public class TestRequestClientConnControl {
         interceptor.process(request, null, context);
 
         final Header header1 = request.getFirstHeader(HttpHeaders.CONNECTION);
-        Assert.assertNotNull(header1);
-        Assert.assertEquals(HeaderElements.KEEP_ALIVE, header1.getValue());
+        Assert.assertNull(header1);
+        //Assert.assertEquals(HeaderElements.KEEP_ALIVE, header1.getValue());
         final Header header2 = request.getFirstHeader("Proxy-Connection");
         Assert.assertNull(header2);
     }
@@ -120,8 +120,8 @@ public class TestRequestClientConnControl {
         interceptor.process(request, null, context);
 
         final Header header1 = request.getFirstHeader("Proxy-Connection");
-        Assert.assertNotNull(header1);
-        Assert.assertEquals(HeaderElements.KEEP_ALIVE, header1.getValue());
+        Assert.assertNull(header1);
+        //Assert.assertEquals(HeaderElements.KEEP_ALIVE, header1.getValue());
         final Header header2 = request.getFirstHeader(HttpHeaders.CONNECTION);
         Assert.assertNull(header2);
     }

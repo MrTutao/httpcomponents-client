@@ -91,8 +91,8 @@ public class TestMinimalClientRequestExecution extends LocalServerTestBase {
             for (final Header header: headers) {
                 headerSet.add(header.getName().toLowerCase(Locale.ROOT));
             }
-            Assert.assertEquals(3, headerSet.size());
-            Assert.assertTrue(headerSet.contains("connection"));
+            Assert.assertEquals(2, headerSet.size());
+            //Assert.assertTrue(headerSet.contains("connection"));
             Assert.assertTrue(headerSet.contains("host"));
             Assert.assertTrue(headerSet.contains("user-agent"));
         }
